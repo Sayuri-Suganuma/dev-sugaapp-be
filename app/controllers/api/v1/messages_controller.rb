@@ -1,5 +1,6 @@
 class Api::V1::MessagesController < ApplicationController
   before_action :set_message, only: %i[ show update destroy ]
+  before_action :set_cors_headers
 
   # GET /messages
   def index
@@ -37,6 +38,13 @@ class Api::V1::MessagesController < ApplicationController
   def destroy
     @message.destroy!
   end
+
+
+  #CORSエラーの対策で設定
+  def set_cors_headers
+    response.headers['Access-Control-Allow-Origin'] = '*'
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
